@@ -1,5 +1,9 @@
 <h1>Contestants</h1>
 
-<% @contestants.each do |contestant| %>
-  <%= contestant.name %>
-<% end %>
+  <% @contestants.each do |contestant| %>
+  <div id="contestant-<%=contestant.id%>">
+    <h3><%= link_to "#{contestant.name}", bachelorette_contestant_path(@bachelorette, contestant) %></h3>
+    <p><%= contestant.age %></p>
+    <p><%= contestant.hometown %></p>
+  </div>
+  <% end %>
