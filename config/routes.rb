@@ -3,7 +3,5 @@ Rails.application.routes.draw do
   resources :bachelorettes do
     resources :contestants, only: [:index, :show]
   end
-
-  resources :outings, only: [:show] do
-  end
+  resources :outings, only: [:show]
 end

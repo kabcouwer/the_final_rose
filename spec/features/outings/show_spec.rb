@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'contestant show page' do
+RSpec.describe 'outing show page' do
   before :each do
     @bachelorette_1 = Bachelorette.create!(name: 'Hannah Brown', season_number: 15, description: 'Season 15 - The MOST Dramatic Season Yet!')
     @bachelorette_2 = Bachelorette.create!(name: 'Katie', season_number: 17, description: 'Season 17 - Most dramatic season ever!')
@@ -20,27 +20,18 @@ RSpec.describe 'contestant show page' do
     @outing_contestant_5 = OutingContestant.create!(outing_id: @outing_3.id, contestant_id: @contestant_2.id)
     @outing_contestant_6 = OutingContestant.create!(outing_id: @outing_4.id, contestant_id: @contestant_1.id)
 
-    visit "bachelorettes/#{@bachelorette_1.id}/contestants/#{@contestant_1.id}"
+    visit ("outings/#{@outing_1.id}")
   end
 
-  it 'displays the contestants name, their season number, and description' do
-    expect(page).to have_content(@contestant_1.name)
-    expect(page).to have_content("Season: #{@bachelorette_1.season_number}")
-    expect(page).to have_content(@bachelorette_1.description)
-  end
-
-  it 'displays the outings this contestant went on' do
-    expect(page).to have_content('Outings:')
+  it 'displays the outings name, location, and date' do
     expect(page).to have_content(@outing_1.name)
-    expect(page).to have_content(@outing_2.name)
-    expect(page).to have_content(@outing_4.name)
+    expect(page).to have_content("Location: #{@outing_1.location}")
+    expect(page).to have_content("Date time: #{@outing_1.created_at}")
+    expect(page).to have_content("Number of contestants: #{@outing_1.contestants.count}")
   end
 
-  it 'has a link to each outings show page' do
-    expect(page).to have_link(@outing_1.name)
-
-    click_link(@outing_1.name)
-
-    expect(current_path).to eq("/outings/#{@outing_1.id}")
+  it 'display the number of contestants on date and thier names' do
+    expect(page).to have_content(@contestant_1.name)
+    expect(page).to have_content(@contestant_2.name)
   end
 end
