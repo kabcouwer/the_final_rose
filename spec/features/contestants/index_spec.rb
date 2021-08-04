@@ -9,7 +9,7 @@ RSpec.describe 'contestants index page' do
     @contestant_2 = @bachelorette_1.contestants.create!(name: 'Randy', age: 31, hometown: 'Charleston, SC')
     @contestant_3 = @bachelorette_1.contestants.create!(name: 'Jon', age: 28, hometown: 'New York, NY')
     @contestant_4 = @bachelorette_1.contestants.create!(name: 'George', age: 30, hometown: 'Portland, OR')
-    @contestant_5 = @bachelorette_2.contestants.create!(name: 'Ben', age: 21, hometown: 'Kalamazoo, MI')
+    @contestant_5 = @bachelorette_2.contestants.create!(name: 'Ben', age: 21, hometown: 'Denver, CO')
 
     visit "bachelorettes/#{@bachelorette_1.id}/contestants"
   end
@@ -40,6 +40,13 @@ RSpec.describe 'contestants index page' do
     click_link("#{@contestant_1.name}")
 
     expect(current_path).to eq("/bachelorettes/#{@bachelorette_1.id}/contestants/#{@contestant_1.id}")
+  end
 
+  it 'displays a unique list of all hometowns' do
+    expect(page).to have_content('Hometowns represented:')
+    expect(page).to have_content('Denver, CO')
+    expect(page).to have_content('Charleston, SC')
+    expect(page).to have_content('New York, NY')
+    expect(page).to have_content('Portland, OR')
   end
 end

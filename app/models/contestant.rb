@@ -7,4 +7,9 @@ class Contestant < ApplicationRecord
   def self.average_age
     average(:age)
   end
+
+  def self.unique_hometowns
+    select('DISTINCT hometown')
+    .order('contestants.hometown')
+  end
 end
