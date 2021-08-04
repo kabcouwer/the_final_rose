@@ -3,3 +3,5 @@
 <p>Description: <%= @bachelorette.description %></p>
 
 <%= link_to 'See Contestants', bachelorette_contestants_path(@bachelorette) %>
+
+<p>Average age of contestants: <%= @bachelorette.contestants.average_age %></p>
